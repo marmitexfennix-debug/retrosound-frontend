@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RetroSound AI</title>
+</head>
+<body style="background:black; color:white; text-align:center; font-family:sans-serif;">
+
+<h1>🎵 RetroSound AI</h1>
+
+<input id="prompt" placeholder="Digite o estilo da música" style="padding:10px; width:300px;">
+<br><br>
+
+<button onclick="gerar()" style="padding:10px 20px;">Gerar Música</button>
+
+<p id="resultado"></p>
+
+<script>
+async function gerar() {
+  let prompt = document.getElementById("prompt").value;
+
+  let res = await fetch("https://retrosound-backend.onrender.com/generate?prompt=" + prompt, {
+    method: "POST"
+  });
+
+  let data = await res.json();
+
+  document.getElementById("resultado").innerHTML =
+    "Preview: " + data.preview + "<br>" +
+    "Certificado: " + data.certificate;
+}
+</script>
+
+</body>
+</html>
